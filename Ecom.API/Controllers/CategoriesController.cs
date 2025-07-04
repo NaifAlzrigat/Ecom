@@ -37,9 +37,9 @@ namespace Ecom.API.Controllers
             try
             {
                 var data = await _work.CategoryRepository.GetByIdAsync(id);
-                if (data is null)
-                    return BadRequest(new ResponseAPI(400));
-                return Ok(data);
+                return data is null
+                    ? NotFound(new ResponseAPI(404, "Category not found"))
+                    : Ok(data);
 
             }
             catch (Exception ex)

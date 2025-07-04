@@ -79,5 +79,23 @@ namespace Ecom.API.Controllers
                 return BadRequest(400);
             }
         }
+
+        [HttpDelete("delete-product")]
+        public async Task<IActionResult> Delete(int id)
+        {
+            try
+            {
+                var product =await _work.ProductRepository.GetByIdAsync(id,x=>x.Category,x=>x.Photos);
+                if (product == null) return BadRequest(new ResponseAPI(400));
+                await _work.ProductRepository.DeleteAsync(product);
+                return Ok();
+
+            }
+            catch (Exception ex)
+            {
+
+                return BadRequest(400);
+            }
+        }
     }
 }
