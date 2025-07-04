@@ -3,6 +3,7 @@ using Ecom.Infrastructure.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -10,9 +11,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Ecom.Infrastructure.Data.Migrations
 {
     [DbContext(typeof(AppDBContext))]
-    partial class AppDBContextModelSnapshot : ModelSnapshot
+    [Migration("20250308010833_seedingPhoto")]
+    partial class seedingPhoto
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,11 +106,8 @@ namespace Ecom.Infrastructure.Data.Migrations
                         .HasMaxLength(30)
                         .HasColumnType("nvarchar(30)");
 
-                    b.Property<decimal>("NewPrice")
+                    b.Property<decimal>("Price")
                         .HasColumnType("decimal(18:2)");
-
-                    b.Property<decimal>("OldPrice")
-                        .HasColumnType("decimal(18,2)");
 
                     b.HasKey("Id");
 
@@ -122,8 +122,7 @@ namespace Ecom.Infrastructure.Data.Migrations
                             CategoryId = 1,
                             Description = "Test",
                             Name = "Test",
-                            NewPrice = 10m,
-                            OldPrice = 0m
+                            Price = 10m
                         });
                 });
 
